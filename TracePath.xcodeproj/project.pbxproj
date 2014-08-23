@@ -101,8 +101,8 @@
 		FB62881519A883E500B1C5B0 = {
 			isa = PBXGroup;
 			children = (
-				FBF9AE6A19A88B3E00411189 /* Frameworks */,
 				FB62882019A883E500B1C5B0 /* TracePath */,
+				FBF9AE6A19A88B3E00411189 /* Frameworks */,
 				FB62883619A883E500B1C5B0 /* TracePathTests */,
 				FB62881F19A883E500B1C5B0 /* Products */,
 			);
