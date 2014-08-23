@@ -1,8 +1,12 @@
+# Mac OS X
+*.DS_Store
+
+# Xcode
 /*.xcodeproj/*.mode1v3
+/*.xcodeproj/*.mode2v3
 /*.xcodeproj/*.pbxuser
 /*.xcodeproj/project.xcworkspace/
 /*.xcodeproj/xcuserdata/
+
+# build
 /build/
-*.dmg
-appcast.xml
-package/*.app
