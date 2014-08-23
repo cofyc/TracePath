@@ -1,37 +1,20 @@
 all::
 
 PROJECT=TracePath
+PROVISIONING_PROFILE='PROVISIONING_PROFILE="EE35AA15-55EF-4210-B3FF-2E0116E8CB00"'
 
-.PHONY: all install uninstall clean release debug clean
+.PHONY: all clean release debug
 
 debug:
-	xcodebuild -project ${PROJECT}.xcodeproj -alltargets -configuration Debug build
+	xcodebuild -project ${PROJECT}.xcodeproj -alltargets -configuration Debug build ${PROVISIONING_PROFILE}
 
 release:
-	xcodebuild -project ${PROJECT}.xcodeproj -alltargets -configuration Release build
+	xcodebuild -project ${PROJECT}.xcodeproj -alltargets -configuration Release build ${PROVISIONING_PROFILE}
 
-install: uninstall release
-	cp -r "build/Release/${PROJECT}.app" "/Applications"
-
-uninstall:
-	rm -rf "/Applications/${PROJECT}.app"
-
-test: debug
-	open "build/Debug/${PROJECT}.app/"
-
-test-release: release
-	open "build/Release/${PROJECT}.app/"
+list:
+	xcodebuild -list -project ${PROJECT}.xcodeproj
 
 clean:
 	rm -rf build
-	rm -rf *.dmg
-	rm -rf package/*.app
-	rm -rf appcast.xml
-
-package: release
-	./package.py
-
-archive:
-	git archive master --prefix="${PROJECT}/" | gzip > `git describe master`.tar.gz
 
 all:: debug
