@@ -14,12 +14,12 @@ func %(format:String, args:[CVarArgType]) -> String {
     return NSString(format:format, arguments:getVaList(args))
 }
 
-
 class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
 
     var locManager: CLLocationManager!
     var theMapView: MKMapView!
     var theBtnView: UIToolbar!
+    var userLocations: [CLLocation] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,13 +52,25 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         self.locManager!.delegate = self
     }
 
-    func locationManager(_manager: CLLocationManager!,didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        println("didChangeAuthorizationStatus")
-        self.theMapView.showsUserLocation = true
+    func locationManager(_manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        println("didChangeAuthorizationStatus: %d" % [status.toRaw()])
+        if (status == CLAuthorizationStatus.AuthorizedWhenInUse) {
+            self.theMapView.showsUserLocation = true
+        }
     }
 
-    func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
+    func mapView(mapView: MKMapView!, didUpdateUserLocation mkUserLocation: MKUserLocation) {
+        if (mkUserLocation.location? == nil) {
+            return
+        }
+        var userLocation = mkUserLocation.location!
         println("Current location: %.8f, %.8f" % [userLocation.coordinate.latitude, userLocation.coordinate.longitude])
+        if let last_location = self.userLocations.last? {
+            println("Last location: %.8f, %.8f" % [last_location.coordinate.latitude, last_location.coordinate.longitude])
+            var distance = last_location.distanceFromLocation(userLocation)
+            println(NSString(format:"moved distance %.8f", distance))
+        }
+        self.userLocations.append(userLocation)
 //        let center = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
 //        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
 //        self.theMapView.setRegion(region, animated: true)
