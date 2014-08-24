@@ -2,7 +2,6 @@
 
 ## References
 
-
 ## Google Maps
 
 - https://developers.google.com/maps/documentation/ios/start
@@ -23,3 +22,8 @@ Convert: http://andrew.hedges.name/experiments/convert_lat_long/
 ## Location Simulation
 
 http://stackoverflow.com/a/8545163/288089
+
+## Keeping track of moving things
+
+http://www.slideshare.net/ggeoffre/keeping-track-of-moving-things-mapkit-and-corelocation-in-depth
+src: https://github.com/ggeoffre/KeepingTrack
