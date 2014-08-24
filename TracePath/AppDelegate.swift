@@ -10,6 +10,12 @@ import UIKit
 import CoreData
 import CoreLocation
 
+// S global functions
+func %(format:String, args:[CVarArgType]) -> String {
+    return NSString(format:format, arguments:getVaList(args))
+}
+// E global functions
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
                             
@@ -17,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication!, didFinishLaunchingWithOptions launchOptions: NSDictionary!) -> Bool {
         // Override point for customization after application launch.
-        GMSServices.provideAPIKey("AIzaSyCy7TNw8I1JcTsqX4II4tR_7JssPOinSKs")
         // Main window
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window!.rootViewController = ViewController()

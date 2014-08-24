@@ -13,21 +13,8 @@
 		FB62882E19A883E500B1C5B0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB62882D19A883E500B1C5B0 /* Images.xcassets */; };
 		FB62883A19A883E500B1C5B0 /* TracePathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB62883919A883E500B1C5B0 /* TracePathTests.swift */; };
 		FBBC363C19A9099E002128F5 /* location.gpx in Resources */ = {isa = PBXBuildFile; fileRef = FBBC363B19A9099E002128F5 /* location.gpx */; };
-		FBF9AE6F19A88C5F00411189 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBF9AE6E19A88C5F00411189 /* GoogleMaps.framework */; };
-		FBF9AE8B19A8936600411189 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBF9AE8A19A8936600411189 /* AVFoundation.framework */; };
-		FBF9AE8D19A8937600411189 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBF9AE8C19A8937600411189 /* CoreData.framework */; };
-		FBF9AE8F19A8937D00411189 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBF9AE8E19A8937D00411189 /* CoreLocation.framework */; };
-		FBF9AE9119A8938300411189 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBF9AE9019A8938300411189 /* CoreText.framework */; };
-		FBF9AE9319A8938A00411189 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBF9AE9219A8938A00411189 /* GLKit.framework */; };
-		FBF9AE9519A8939300411189 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBF9AE9419A8939300411189 /* ImageIO.framework */; };
-		FBF9AE9719A8939A00411189 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FBF9AE9619A8939A00411189 /* libc++.dylib */; };
-		FBF9AE9919A893A400411189 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FBF9AE9819A893A400411189 /* libicucore.dylib */; };
-		FBF9AE9B19A893AB00411189 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FBF9AE9A19A893AB00411189 /* libz.dylib */; };
-		FBF9AE9D19A893B000411189 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBF9AE9C19A893B000411189 /* OpenGLES.framework */; };
-		FBF9AE9F19A893B800411189 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBF9AE9E19A893B800411189 /* QuartzCore.framework */; };
-		FBF9AEA119A893BD00411189 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBF9AEA019A893BD00411189 /* SystemConfiguration.framework */; };
+		FBBC364019AA0D5C002128F5 /* GPX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBBC363F19AA0D5C002128F5 /* GPX.framework */; };
 		FBF9AEA719A8966500411189 /* ObjcSwiftBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF9AEA619A8966500411189 /* ObjcSwiftBridge.m */; };
-		FBF9AEA919A8BE7600411189 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBF9AEA819A8BE7600411189 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +38,7 @@
 		FB62883819A883E500B1C5B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB62883919A883E500B1C5B0 /* TracePathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracePathTests.swift; sourceTree = "<group>"; };
 		FBBC363B19A9099E002128F5 /* location.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = location.gpx; sourceTree = "<group>"; };
+		FBBC363F19AA0D5C002128F5 /* GPX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPX.framework; path = Frameworks/GPX.framework; sourceTree = "<group>"; };
 		FBF9AE6E19A88C5F00411189 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = Frameworks/GoogleMaps.framework; sourceTree = "<group>"; };
 		FBF9AE8A19A8936600411189 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FBF9AE8C19A8937600411189 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -74,20 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FBF9AEA919A8BE7600411189 /* MapKit.framework in Frameworks */,
-				FBF9AEA119A893BD00411189 /* SystemConfiguration.framework in Frameworks */,
-				FBF9AE9F19A893B800411189 /* QuartzCore.framework in Frameworks */,
-				FBF9AE9D19A893B000411189 /* OpenGLES.framework in Frameworks */,
-				FBF9AE9B19A893AB00411189 /* libz.dylib in Frameworks */,
-				FBF9AE9919A893A400411189 /* libicucore.dylib in Frameworks */,
-				FBF9AE9719A8939A00411189 /* libc++.dylib in Frameworks */,
-				FBF9AE9519A8939300411189 /* ImageIO.framework in Frameworks */,
-				FBF9AE9319A8938A00411189 /* GLKit.framework in Frameworks */,
-				FBF9AE9119A8938300411189 /* CoreText.framework in Frameworks */,
-				FBF9AE8F19A8937D00411189 /* CoreLocation.framework in Frameworks */,
-				FBF9AE8D19A8937600411189 /* CoreData.framework in Frameworks */,
-				FBF9AE8B19A8936600411189 /* AVFoundation.framework in Frameworks */,
-				FBF9AE6F19A88C5F00411189 /* GoogleMaps.framework in Frameworks */,
+				FBBC364019AA0D5C002128F5 /* GPX.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +146,7 @@
 		FBF9AE6A19A88B3E00411189 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FBBC363F19AA0D5C002128F5 /* GPX.framework */,
 				FBF9AEA819A8BE7600411189 /* MapKit.framework */,
 				FBF9AEA019A893BD00411189 /* SystemConfiguration.framework */,
 				FBF9AE9E19A893B800411189 /* QuartzCore.framework */,
@@ -347,7 +323,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -384,7 +360,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
