@@ -80,6 +80,26 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         self.userLocations.append(userLocation)
     }
 
+    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+        println("mapView/viewForAnnotation")
+        if annotation is MKUserLocation {
+            //return nil so map view draws "blue dot" for standard user location
+            return nil
+        }
+        let reuseId = "pin"
+
+        var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.animatesDrop = true
+            pinView!.pinColor = .Purple
+        } else {
+            pinView!.annotation = annotation
+        }
+        return pinView
+    }
+
     func start(sender: UIBarButtonItem!) {
         println(String(format: "pressed %@ button", sender!.title!))
     }
@@ -102,9 +122,24 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
 
     func play_location(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+        self.theMapView.showsUserLocation = false
+//        CLLocationCoordinate2D  ctrpoint;
+//        ctrpoint.latitude = 53.58448;
+//        ctrpoint.longitude =-8.93772;
+//        AddressAnnotation *addAnnotation = [[AddressAnnotation alloc] initWithCoordinate:ctrpoint];
+//        [mapview addAnnotation:addAnnotation];
+//        [addAnnotation release];
+
         let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        let point = MKPointAnnotation()
+        point.coordinate = center
+//        let location = CLLocation()
+//        location.coordinate = center
+//        point.location = location
+        self.theMapView.addAnnotation(point)
         self.theMapView.setRegion(region, animated: true)
+        self.theMapView.showsUserLocation = true
     }
 
     override func didReceiveMemoryWarning() {
