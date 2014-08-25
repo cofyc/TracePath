@@ -10,12 +10,15 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
 
     var locManager: CLLocationManager!
     var theMapView: MKMapView!
     var theToolBarView: UIToolbar!
     var userLocations: [CLLocation] = []
+    var theTableView: UITableView!
+    var items = ["We", "Heart", "Swift"]
+    var theTableViewShowed = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,6 +105,38 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
 
     func start(sender: UIBarButtonItem!) {
         println(String(format: "pressed %@ button", sender!.title!))
+
+        // show table view
+        var frame = CGRectMake(self.view.frame.size.width * 0.04, self.view.frame.size.width * 0.04, self.view.frame.size.width * 0.92, 0)
+        var dropDownFrame = CGRectMake(self.view.frame.size.width * 0.04, self.view.frame.size.width * 0.04, self.view.frame.size.width * 0.92, self.view.frame.size.height * 0.85)
+        if self.theTableView == nil {
+            self.theTableView = UITableView()
+            self.theTableView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.7)
+            self.theTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+            self.theTableView.frame = frame;
+            self.theTableView.dataSource = self;
+            self.theTableView.delegate = self;
+            self.view.addSubview(self.theTableView)
+        }
+
+        self.theTableView.reloadData()
+
+        // drop animation
+        if (!self.theTableViewShowed) {
+            UIView.animateWithDuration(0.75, animations: {
+                self.theTableView.frame = dropDownFrame
+                }, completion: { (finished: Bool) in
+                    println("table view drop down expaned")
+            })
+        } else {
+            UIView.animateWithDuration(0.75, animations: {
+                self.theTableView.frame = frame
+                }, completion: { (finished: Bool) in
+                println("table view drop down collapsed")
+//                self.theTableView.hidden = true
+            })
+        }
+        self.theTableViewShowed = !self.theTableViewShowed
     }
 
     func play(sender: UIBarButtonItem!) {
@@ -141,6 +176,22 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         self.theMapView.setRegion(region, animated: true)
         self.theMapView.showsUserLocation = true
     }
+
+    // S table view
+    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+        return self.items.count;
+    }
+
+    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+        var cell:UITableViewCell = self.theTableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
+        cell.textLabel.text = self.items[indexPath.row]
+        return cell
+    }
+
+    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
+        println("You selected cell #\(indexPath.row)!")
+    }
+    // E table view
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
