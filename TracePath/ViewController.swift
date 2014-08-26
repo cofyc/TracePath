@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
 
     var locManager: CLLocationManager!
     var theMapView: MKMapView!
@@ -45,12 +45,19 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
 
         // user tracking button
         var trackButton = MKUserTrackingBarButtonItem(mapView: self.theMapView)
+        var allButton = UIBarButtonItem(title: "All", style: UIBarButtonItemStyle.Plain, target: self, action: "all:")
         // start button
         var recordButton = UIBarButtonItem(title: "Start", style: UIBarButtonItemStyle.Plain, target: self, action: "start:")
         // play button
         var playButton = UIBarButtonItem(title: "Play", style: UIBarButtonItemStyle.Plain, target: self, action: "play:")
 
-        self.theToolBarView.setItems([trackButton, recordButton, playButton], animated: true)
+        self.theToolBarView.setItems([trackButton, allButton, recordButton, playButton], animated: true)
+
+        //
+        var longPressGesture = UILongPressGestureRecognizer(target: self, action: "handleLongPressGesture:")
+        longPressGesture.delegate = self
+        longPressGesture.minimumPressDuration = 0.5
+        self.theMapView.addGestureRecognizer(longPressGesture)
 
         // location
         self.locManager = CLLocationManager()
@@ -80,7 +87,14 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             var distance = last_location.distanceFromLocation(userLocation)
             println(String(format:"moved distance %.8f", distance))
         }
+        self.center_to_location(userLocation)
         self.userLocations.append(userLocation)
+    }
+
+    func center_to_location(location: CLLocation) {
+        var center = location.coordinate
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        self.theMapView.setRegion(region, animated: true)
     }
 
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
@@ -103,9 +117,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         return pinView
     }
 
-    func start(sender: UIBarButtonItem!) {
-        println(String(format: "pressed %@ button", sender!.title!))
+    func mapView(mapView: MKMapView!, didLongPressAtCoordinate coordinate: CLLocationCoordinate2D) {
+        println("You tapped at \(coordinate.latitude), \(coordinate.longitude)")
+    }
 
+    func all(sender: UIBarButtonItem) {
         // show table view
         var frame = CGRectMake(self.view.frame.size.width * 0.04, self.view.frame.size.width * 0.04, self.view.frame.size.width * 0.92, 0)
         var dropDownFrame = CGRectMake(self.view.frame.size.width * 0.04, self.view.frame.size.width * 0.04, self.view.frame.size.width * 0.92, self.view.frame.size.height * 0.85)
@@ -132,11 +148,15 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             UIView.animateWithDuration(0.75, animations: {
                 self.theTableView.frame = frame
                 }, completion: { (finished: Bool) in
-                println("table view drop down collapsed")
-//                self.theTableView.hidden = true
+                    println("table view drop down collapsed")
+                    //                self.theTableView.hidden = true
             })
         }
         self.theTableViewShowed = !self.theTableViewShowed
+    }
+
+    func start(sender: UIBarButtonItem!) {
+        println(String(format: "pressed %@ button", sender!.title!))
     }
 
     func play(sender: UIBarButtonItem!) {
@@ -148,7 +168,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     var root = GPXParser.parseGPXWithString(content)
                     for (index, element) in enumerate(root.waypoints!) {
                         println("(Item %d) latitude: %.8f longitude: %.8f" % [index, element.latitude, element.longitude])
-                        self.play_location(element.latitude, longitude: element.longitude)
+                        self.playLocation(CLLocation(latitude: element.latitude, longitude: element.longitude))
                         sleep(2)
                     }
                 })
@@ -156,25 +176,27 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
     }
 
-    func play_location(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
-        self.theMapView.showsUserLocation = false
-//        CLLocationCoordinate2D  ctrpoint;
-//        ctrpoint.latitude = 53.58448;
-//        ctrpoint.longitude =-8.93772;
-//        AddressAnnotation *addAnnotation = [[AddressAnnotation alloc] initWithCoordinate:ctrpoint];
-//        [mapview addAnnotation:addAnnotation];
-//        [addAnnotation release];
-
-        let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+    func playLocation(location: CLLocation) {
         let point = MKPointAnnotation()
-        point.coordinate = center
-//        let location = CLLocation()
-//        location.coordinate = center
-//        point.location = location
+        point.coordinate = location.coordinate
         self.theMapView.addAnnotation(point)
-        self.theMapView.setRegion(region, animated: true)
-        self.theMapView.showsUserLocation = true
+        self.center_to_location(location)
+    }
+
+    func handleLongPressGesture(sender: UIGestureRecognizer) {
+        println("long pressed")
+        if (sender.state == UIGestureRecognizerState.Ended) {
+            return
+//            self.theMapView.removeGestureRecognizer(sender)
+        }
+
+        // here we get the CGPoint for the touch and convert it to latitude and longitude coordinate to display on the map
+        var point = sender.locationInView(self.theMapView)
+        var coordinate = self.theMapView.convertPoint(point, toCoordinateFromView:self.theMapView)
+        // create annotation
+        var dropPin = MKPointAnnotation()
+        dropPin.coordinate = coordinate
+        self.theMapView.addAnnotation(dropPin)
     }
 
     // S table view
