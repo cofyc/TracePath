@@ -12,6 +12,7 @@
 		FB62882919A883E500B1C5B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB62882819A883E500B1C5B0 /* ViewController.swift */; };
 		FB62882E19A883E500B1C5B0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB62882D19A883E500B1C5B0 /* Images.xcassets */; };
 		FB62883A19A883E500B1C5B0 /* TracePathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB62883919A883E500B1C5B0 /* TracePathTests.swift */; };
+		FB7B747019AE20830064892C /* TPMKAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7B746F19AE20830064892C /* TPMKAnnotation.swift */; };
 		FBBC363C19A9099E002128F5 /* location.gpx in Resources */ = {isa = PBXBuildFile; fileRef = FBBC363B19A9099E002128F5 /* location.gpx */; };
 		FBBC364019AA0D5C002128F5 /* GPX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBBC363F19AA0D5C002128F5 /* GPX.framework */; };
 		FBF9AEA719A8966500411189 /* ObjcSwiftBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF9AEA619A8966500411189 /* ObjcSwiftBridge.m */; };
@@ -37,6 +38,7 @@
 		FB62883319A883E500B1C5B0 /* TracePathTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TracePathTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB62883819A883E500B1C5B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB62883919A883E500B1C5B0 /* TracePathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracePathTests.swift; sourceTree = "<group>"; };
+		FB7B746F19AE20830064892C /* TPMKAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPMKAnnotation.swift; sourceTree = "<group>"; };
 		FBBC363B19A9099E002128F5 /* location.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = location.gpx; sourceTree = "<group>"; };
 		FBBC363F19AA0D5C002128F5 /* GPX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPX.framework; path = Frameworks/GPX.framework; sourceTree = "<group>"; };
 		FBF9AE6E19A88C5F00411189 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = Frameworks/GoogleMaps.framework; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				FB62882319A883E500B1C5B0 /* AppDelegate.swift */,
 				FB62882819A883E500B1C5B0 /* ViewController.swift */,
+				FB7B746F19AE20830064892C /* TPMKAnnotation.swift */,
 				FB62882D19A883E500B1C5B0 /* Images.xcassets */,
 				FB62882519A883E500B1C5B0 /* TracePath.xcdatamodeld */,
 				FB62882119A883E500B1C5B0 /* Supporting Files */,
@@ -263,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB7B747019AE20830064892C /* TPMKAnnotation.swift in Sources */,
 				FBF9AEA719A8966500411189 /* ObjcSwiftBridge.m in Sources */,
 				FB62882919A883E500B1C5B0 /* ViewController.swift in Sources */,
 				FB62882719A883E500B1C5B0 /* TracePath.xcdatamodeld in Sources */,

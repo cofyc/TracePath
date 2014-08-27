@@ -104,17 +104,22 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             return nil
         }
         let reuseId = "pin"
-
         var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId) as? MKPinAnnotationView
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
             pinView!.animatesDrop = true
+            pinView!.draggable = true
             pinView!.pinColor = .Purple
         } else {
             pinView!.annotation = annotation
         }
         return pinView
+    }
+
+    // drag pin (TODO)
+    func  mapView(mapView: MKMapView!, annotationView: MKAnnotationView!, didChangeDragState newState: MKAnnotationViewDragState, fromOldState oldState:MKAnnotationViewDragState) {
+        println("annotationView/didChangeDragState");
     }
 
     func mapView(mapView: MKMapView!, didLongPressAtCoordinate coordinate: CLLocationCoordinate2D) {
@@ -194,9 +199,28 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         var point = sender.locationInView(self.theMapView)
         var coordinate = self.theMapView.convertPoint(point, toCoordinateFromView:self.theMapView)
         // create annotation
-        var dropPin = MKPointAnnotation()
-        dropPin.coordinate = coordinate
+        var dropPin = TPMKAnnotation(coordinate: coordinate)
         self.theMapView.addAnnotation(dropPin)
+
+        println("total %d annotations" % [self.theMapView.annotations.count])
+
+        var startPoint = self.theMapView.userLocation.coordinate
+        var endPoint = coordinate
+        var coordinates = [startPoint, endPoint]
+        var polyline = MKPolyline(coordinates: &coordinates, count: coordinates.count)
+//        self.theMapView.removeOverlays(self.theMapView.overlays)
+        self.theMapView.addOverlay(polyline)
+    }
+
+    // called to draw overlay
+    func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
+        if overlay is MKPolyline {
+            var polylineRenderer = MKPolylineRenderer(overlay: overlay)
+            polylineRenderer.strokeColor = UIColor.blueColor()
+            polylineRenderer.lineWidth = 3
+            return polylineRenderer
+        }
+        return nil
     }
 
     // S table view
