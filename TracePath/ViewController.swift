@@ -79,12 +79,19 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         self.debug("system started")
     }
 
-    func debug(log: String) {
+    func debug(message: String) {
+        let date = NSDate()
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss" // GMT +8
+        let log = "[%@] %@".format(formatter.stringFromDate(date), message)
+        // console
+        println(log)
+        // on debug view
         self.debugView.text = self.debugView.text.stringByAppendingString(log + "\n")
     }
 
     func locationManager(_manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        println("didChangeAuthorizationStatus: %d" % [status.toRaw()])
+        self.debug("didChangeAuthorizationStatus: %d".format(status.toRaw()))
         if (status == CLAuthorizationStatus.AuthorizedWhenInUse) {
             self.theMapView.showsUserLocation = true
         }
@@ -95,11 +102,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             return
         }
         var userLocation = mkUserLocation.location!
-        println("Current location: %.8f, %.8f" % [userLocation.coordinate.latitude, userLocation.coordinate.longitude])
+        self.debug("Current location: %.8f, %.8f".format(userLocation.coordinate.latitude, userLocation.coordinate.longitude))
         if let last_location = self.userLocations.last? {
-            println("Last location: %.8f, %.8f" % [last_location.coordinate.latitude, last_location.coordinate.longitude])
+            self.debug("Last location: %.8f, %.8f".format(last_location.coordinate.latitude, last_location.coordinate.longitude))
             var distance = last_location.distanceFromLocation(userLocation)
-            println(String(format:"moved distance %.8f", distance))
+            self.debug("Moved distance %.8f".format(distance))
         }
         self.center_to_location(userLocation)
         self.userLocations.append(userLocation)
@@ -112,7 +119,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
 
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-        println("mapView/viewForAnnotation")
         if annotation is MKUserLocation {
             //return nil so map view draws "blue dot" for standard user location
             return nil
@@ -137,7 +143,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
 
     func mapView(mapView: MKMapView!, didLongPressAtCoordinate coordinate: CLLocationCoordinate2D) {
-        println("You tapped at \(coordinate.latitude), \(coordinate.longitude)")
+        self.debug("You tapped at \(coordinate.latitude), \(coordinate.longitude)")
     }
 
     func all(sender: UIBarButtonItem) {
@@ -175,18 +181,18 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
 
     func start(sender: UIBarButtonItem!) {
-        println(String(format: "pressed %@ button", sender!.title!))
+        self.debug(String(format: "pressed %@ button", sender!.title!))
     }
 
     func play(sender: UIBarButtonItem!) {
-        println(String(format: "pressed %@ button", sender!.title!))
+        self.debug(String(format: "pressed %@ button", sender!.title!))
         let bundle = NSBundle.mainBundle()
         if let path = bundle.pathForResource("location", ofType: "gpx") {
             if let content = String.stringWithContentsOfFile(path, encoding: NSUTF8StringEncoding, error: nil) {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                     var root = GPXParser.parseGPXWithString(content)
                     for (index, element) in enumerate(root.waypoints!) {
-                        println("(Item %d) latitude: %.8f longitude: %.8f" % [index, element.latitude, element.longitude])
+                        self.debug("(Item %d) latitude: %.8f longitude: %.8f".format(index, element.latitude, element.longitude))
                         self.playLocation(CLLocation(latitude: element.latitude, longitude: element.longitude))
                         sleep(2)
                     }
@@ -203,7 +209,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
 
     func handleLongPressGesture(sender: UIGestureRecognizer) {
-        println("long pressed")
+        self.debug("long pressed")
         if (sender.state == UIGestureRecognizerState.Ended) {
             return
 //            self.theMapView.removeGestureRecognizer(sender)
@@ -216,7 +222,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         var dropPin = TPMKAnnotation(coordinate: coordinate)
         self.theMapView.addAnnotation(dropPin)
 
-        println("total %d annotations" % [self.theMapView.annotations.count])
+        self.debug("total %d annotations".format(self.theMapView.annotations.count))
 
         var startPoint = self.theMapView.userLocation.coordinate
         var endPoint = coordinate
@@ -249,7 +255,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
 
     func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        println("You selected cell #\(indexPath.row)!")
+        self.debug("You selected cell #\(indexPath.row)!")
     }
     // E table view
 

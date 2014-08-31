@@ -10,12 +10,6 @@ import UIKit
 import CoreData
 import CoreLocation
 
-// S global functions
-func %(format:String, args:[CVarArgType]) -> String {
-    return NSString(format:format, arguments:getVaList(args))
-}
-// E global functions
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
                             
