@@ -17,6 +17,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var theToolBarView: UIToolbar!
     var userLocations: [CLLocation] = []
     var theTableView: UITableView!
+    var debugView: UITextView!
     var items = ["We", "Heart", "Swift"]
     var theTableViewShowed = false
 
@@ -67,6 +68,19 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             self.locManager!.startUpdatingLocation()
         }
         self.locManager!.delegate = self
+
+        // debug view
+        let viewRect = CGRect(x: 10, y: 10, width: self.view.frame.size.width - 20, height: self.view.frame.size.height - 20)
+        self.debugView = UITextView(frame: viewRect)
+//        self.debugView.setBackgroundImage(UIImage(), forToolbarPosition: UIBarPosition.Any, barMetrics: UIBarMetrics.Default)
+        self.debugView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.1)
+        self.debugView.userInteractionEnabled = false
+        self.view.addSubview(self.debugView)
+        self.debug("system started")
+    }
+
+    func debug(log: String) {
+        self.debugView.text = self.debugView.text.stringByAppendingString(log + "\n")
     }
 
     func locationManager(_manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
