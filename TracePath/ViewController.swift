@@ -18,6 +18,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var userLocations: [CLLocation] = []
     var theTableView: UITableView!
     var debugView: UITextView!
+    var infoView: UIView!
     var items = ["We", "Heart", "Swift"]
     var theTableViewShowed = false
 
@@ -77,6 +78,11 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         self.debugView.userInteractionEnabled = false
         self.view.addSubview(self.debugView)
         self.debug("system started")
+
+        // info view (from xib file)
+        self.infoView = NSBundle.mainBundle().loadNibNamed("InfoView", owner: self, options: nil)[0] as UIView
+        self.infoView.userInteractionEnabled = false
+        self.view.addSubview(self.infoView)
     }
 
     func debug(message: String) {
