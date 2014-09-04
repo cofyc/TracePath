@@ -22,6 +22,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var items = ["We", "Heart", "Swift"]
     var theTableViewShowed = false
 
+    @IBOutlet weak var textField: UITextField!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -81,6 +83,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
 
         // info view (from xib file)
         self.infoView = NSBundle.mainBundle().loadNibNamed("InfoView", owner: self, options: nil)[0] as UIView
+        self.textField.text = "here you are"
         self.infoView.userInteractionEnabled = false
         self.view.addSubview(self.infoView)
     }
