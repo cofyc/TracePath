@@ -10,24 +10,23 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
 
     var locManager: CLLocationManager!
     var theMapView: MKMapView!
     var theToolBarView: UIToolbar!
     var userLocations: [CLLocation] = []
-    var theTableView: UITableView!
     var debugView: UITextView!
     var infoView: UIView!
-    var items = ["We", "Heart", "Swift"]
     var theTableViewShowed = false
+    var recordTableViewController: RecordTableViewController = RecordTableViewController()
 
     @IBOutlet weak var latitude: UITextField!
     @IBOutlet weak var longitude: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // map view
         self.theMapView = MKMapView(frame: self.view.frame)
         self.theMapView.delegate = self
@@ -159,34 +158,27 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
 
     func all(sender: UIBarButtonItem) {
-        // show table view
-        var frame = CGRectMake(self.view.frame.size.width * 0.04, self.view.frame.size.width * 0.04, self.view.frame.size.width * 0.92, 0)
-        var dropDownFrame = CGRectMake(self.view.frame.size.width * 0.04, self.view.frame.size.width * 0.04, self.view.frame.size.width * 0.92, self.view.frame.size.height * 0.85)
-        if self.theTableView == nil {
-            self.theTableView = UITableView()
-            self.theTableView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.7)
-            self.theTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-            self.theTableView.frame = frame;
-            self.theTableView.dataSource = self;
-            self.theTableView.delegate = self;
-            self.view.addSubview(self.theTableView)
-        }
-
-        self.theTableView.reloadData()
-
-        // drop animation
+        var fullFrame = CGRectMake(0, statusBarFrame.height, screenWidth, 400);
+        var hiddenFrame = CGRectMake(0, statusBarFrame.height, screenWidth, 0);
+        // toggle view
         if (!self.theTableViewShowed) {
+            self.recordTableViewController.view.frame = hiddenFrame
+            self.addChildViewController(recordTableViewController)
+            self.view.addSubview(recordTableViewController.view)
             UIView.animateWithDuration(0.75, animations: {
-                self.theTableView.frame = dropDownFrame
+                self.recordTableViewController.view.frame = fullFrame
                 }, completion: { (finished: Bool) in
                     println("table view drop down expaned")
             })
         } else {
+            self.addChildViewController(recordTableViewController)
+            self.view.addSubview(recordTableViewController.view)
             UIView.animateWithDuration(0.75, animations: {
-                self.theTableView.frame = frame
+                self.recordTableViewController.view.frame = hiddenFrame
                 }, completion: { (finished: Bool) in
                     println("table view drop down collapsed")
-                    //                self.theTableView.hidden = true
+                    self.recordTableViewController.removeFromParentViewController()
+                    self.recordTableViewController.view.removeFromSuperview()
             })
         }
         self.theTableViewShowed = !self.theTableViewShowed
@@ -204,7 +196,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                     var root = GPXParser.parseGPXWithString(content)
                     for (index, element) in enumerate(root.waypoints!) {
-                        self.debug("(Item %d) latitude: %.8f longitude: %.8f".format(index, element.latitude, element.longitude))
+                        self.debug("latitude: %.8f longitude: %.8f".format(element.latitude, element.longitude))
                         self.playLocation(CLLocation(latitude: element.latitude, longitude: element.longitude))
                         sleep(2)
                     }
@@ -226,7 +218,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             return
 //            self.theMapView.removeGestureRecognizer(sender)
         }
-
+        
         // here we get the CGPoint for the touch and convert it to latitude and longitude coordinate to display on the map
         var point = sender.locationInView(self.theMapView)
         var coordinate = self.theMapView.convertPoint(point, toCoordinateFromView:self.theMapView)
@@ -254,22 +246,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         }
         return nil
     }
-
-    // S table view
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return self.items.count;
-    }
-
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
-        var cell:UITableViewCell = self.theTableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
-        cell.textLabel.text = self.items[indexPath.row]
-        return cell
-    }
-
-    func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!) {
-        self.debug("You selected cell #\(indexPath.row)!")
-    }
-    // E table view
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

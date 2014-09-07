@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		FB3897FA19B76CF800840520 /* InfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB3897F919B76CF800840520 /* InfoView.xib */; };
 		FB3C808819B30A9B00BFF820 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C808719B30A9B00BFF820 /* Extensions.swift */; };
+		FB59599119BC4D020086001E /* SwiftCoreDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB59599019BC4D020086001E /* SwiftCoreDataHelper.swift */; };
+		FB59599619BC557D0086001E /* RecordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB59599419BC557D0086001E /* RecordTableViewController.swift */; };
+		FB59599719BC557D0086001E /* RecordTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FB59599519BC557D0086001E /* RecordTableViewController.xib */; };
+		FB59599919BC6C7C0086001E /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB59599819BC6C7C0086001E /* Location.swift */; };
+		FB59599B19BC6C7D0086001E /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB59599A19BC6C7D0086001E /* Record.swift */; };
 		FB62882419A883E500B1C5B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB62882319A883E500B1C5B0 /* AppDelegate.swift */; };
 		FB62882719A883E500B1C5B0 /* TracePath.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FB62882519A883E500B1C5B0 /* TracePath.xcdatamodeld */; };
 		FB62882919A883E500B1C5B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB62882819A883E500B1C5B0 /* ViewController.swift */; };
@@ -33,6 +38,11 @@
 /* Begin PBXFileReference section */
 		FB3897F919B76CF800840520 /* InfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoView.xib; sourceTree = "<group>"; };
 		FB3C808719B30A9B00BFF820 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		FB59599019BC4D020086001E /* SwiftCoreDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftCoreDataHelper.swift; sourceTree = "<group>"; };
+		FB59599419BC557D0086001E /* RecordTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordTableViewController.swift; sourceTree = "<group>"; };
+		FB59599519BC557D0086001E /* RecordTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordTableViewController.xib; sourceTree = "<group>"; };
+		FB59599819BC6C7C0086001E /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		FB59599A19BC6C7D0086001E /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		FB62881E19A883E500B1C5B0 /* TracePath.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TracePath.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB62882219A883E500B1C5B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB62882319A883E500B1C5B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +92,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FB59599C19BC6C8D0086001E /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				FB62882519A883E500B1C5B0 /* TracePath.xcdatamodeld */,
+				FB59599A19BC6C7D0086001E /* Record.swift */,
+				FB59599819BC6C7C0086001E /* Location.swift */,
+			);
+			name = DataModel;
+			sourceTree = "<group>";
+		};
 		FB62881519A883E500B1C5B0 = {
 			isa = PBXGroup;
 			children = (
@@ -108,13 +128,16 @@
 				FB62882319A883E500B1C5B0 /* AppDelegate.swift */,
 				FB62882819A883E500B1C5B0 /* ViewController.swift */,
 				FB7B746F19AE20830064892C /* TPMKAnnotation.swift */,
-				FB62882D19A883E500B1C5B0 /* Images.xcassets */,
-				FB62882519A883E500B1C5B0 /* TracePath.xcdatamodeld */,
-				FB62882119A883E500B1C5B0 /* Supporting Files */,
 				FBF9AEA619A8966500411189 /* ObjcSwiftBridge.m */,
-				FBF9AEA519A8966500411189 /* TracePath-Bridging-Header.h */,
 				FB3C808719B30A9B00BFF820 /* Extensions.swift */,
 				FB3897F919B76CF800840520 /* InfoView.xib */,
+				FB59599419BC557D0086001E /* RecordTableViewController.swift */,
+				FB59599519BC557D0086001E /* RecordTableViewController.xib */,
+				FB59599019BC4D020086001E /* SwiftCoreDataHelper.swift */,
+				FBF9AEA519A8966500411189 /* TracePath-Bridging-Header.h */,
+				FB62882D19A883E500B1C5B0 /* Images.xcassets */,
+				FB59599C19BC6C8D0086001E /* DataModel */,
+				FB62882119A883E500B1C5B0 /* Supporting Files */,
 			);
 			path = TracePath;
 			sourceTree = "<group>";
@@ -256,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB3897FA19B76CF800840520 /* InfoView.xib in Resources */,
+				FB59599719BC557D0086001E /* RecordTableViewController.xib in Resources */,
 				FBBC363C19A9099E002128F5 /* location.gpx in Resources */,
 				FB62882E19A883E500B1C5B0 /* Images.xcassets in Resources */,
 			);
@@ -275,8 +299,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB59599619BC557D0086001E /* RecordTableViewController.swift in Sources */,
 				FB7B747019AE20830064892C /* TPMKAnnotation.swift in Sources */,
+				FB59599B19BC6C7D0086001E /* Record.swift in Sources */,
 				FBF9AEA719A8966500411189 /* ObjcSwiftBridge.m in Sources */,
+				FB59599119BC4D020086001E /* SwiftCoreDataHelper.swift in Sources */,
+				FB59599919BC6C7C0086001E /* Location.swift in Sources */,
 				FB62882919A883E500B1C5B0 /* ViewController.swift in Sources */,
 				FB62882719A883E500B1C5B0 /* TracePath.xcdatamodeld in Sources */,
 				FB62882419A883E500B1C5B0 /* AppDelegate.swift in Sources */,

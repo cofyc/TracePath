@@ -8,6 +8,12 @@
 
 import Foundation
 
+// global variables
+let statusBarFrame = UIApplication.sharedApplication().statusBarFrame
+let screenRect = UIScreen.mainScreen().bounds
+let screenWidth = screenRect.size.width
+let screenHeight = screenRect.size.height
+
 // Add format function for String type.
 func StringWithFormat(format: String, args: CVarArgType...) -> String {
     return NSString(format: format, arguments: getVaList(args))
