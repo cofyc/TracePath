@@ -22,7 +22,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var items = ["We", "Heart", "Swift"]
     var theTableViewShowed = false
 
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var latitude: UITextField!
+    @IBOutlet weak var longitude: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +84,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
 
         // info view (from xib file)
         self.infoView = NSBundle.mainBundle().loadNibNamed("InfoView", owner: self, options: nil)[0] as UIView
-        self.textField.text = "here you are"
         self.infoView.userInteractionEnabled = false
         self.view.addSubview(self.infoView)
     }
@@ -96,6 +96,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         // console
         println(log)
         // on debug view
+        self.debugView.textColor = UIColor.greenColor()
         self.debugView.text = self.debugView.text.stringByAppendingString(log + "\n")
     }
 
@@ -111,11 +112,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             return
         }
         var userLocation = mkUserLocation.location!
-        self.debug("Current location: %.8f, %.8f".format(userLocation.coordinate.latitude, userLocation.coordinate.longitude))
+        self.latitude.text = "lat: %.8f".format(userLocation.coordinate.latitude)
+        self.longitude.text = "lon: %.8f".format(userLocation.coordinate.longitude)
+//        self.debug("Current location: %.8f, %.8f".format(userLocation.coordinate.latitude, userLocation.coordinate.longitude))
         if let last_location = self.userLocations.last? {
-            self.debug("Last location: %.8f, %.8f".format(last_location.coordinate.latitude, last_location.coordinate.longitude))
+//            self.debug("Last location: %.8f, %.8f".format(last_location.coordinate.latitude, last_location.coordinate.longitude))
             var distance = last_location.distanceFromLocation(userLocation)
-            self.debug("Moved distance %.8f".format(distance))
+//            self.debug("Moved distance %.8f".format(distance))
         }
         self.center_to_location(userLocation)
         self.userLocations.append(userLocation)
