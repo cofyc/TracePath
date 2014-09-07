@@ -16,13 +16,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var theMapView: MKMapView!
     var theToolBarView: UIToolbar!
     var userLocations: [CLLocation] = []
-    var debugView: UITextView!
-    var infoView: UIView!
     var theTableViewShowed: Bool = false
-    var recordTableViewController: RecordTableViewController = RecordTableViewController()
-
-    @IBOutlet weak var latitude: UITextField!
-    @IBOutlet weak var longitude: UITextField!
+    var recordTableViewController: RecordTableViewController = RecordTableViewController(nibName: "RecordTableView", bundle: nil)
+    var statusViewController: StatusViewController = StatusViewController(nibName: "StatusViewController", bundle: nil)
+    var debugViewController: DebugViewController = DebugViewController(nibName: "DebugViewController", bundle: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,30 +70,18 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         self.locManager!.delegate = self
 
         // debug view
-        let viewRect = CGRect(x: 10, y: 10, width: self.view.frame.size.width - 20, height: self.view.frame.size.height - 20)
-        self.debugView = UITextView(frame: viewRect)
-//        self.debugView.setBackgroundImage(UIImage(), forToolbarPosition: UIBarPosition.Any, barMetrics: UIBarMetrics.Default)
-        self.debugView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.1)
-        self.debugView.userInteractionEnabled = false
-        self.view.addSubview(self.debugView)
-        self.debug("system started")
+        self.debugViewController.view.frame = CGRect(x: 0, y: statusBarFrame.height, width: self.view.frame.size.width, height: self.view.frame.size.height - statusBarFrame.height)
+        self.addChildViewController(self.debugViewController)
+        self.view.addSubview(self.debugViewController.view)
 
-        // info view (from xib file)
-        self.infoView = NSBundle.mainBundle().loadNibNamed("InfoView", owner: self, options: nil)[0] as UIView
-        self.infoView.userInteractionEnabled = false
-        self.view.addSubview(self.infoView)
+        // status view controller
+        self.statusViewController.view.frame = CGRect(x: 0, y:statusBarFrame.height, width: 200, height: 200)
+        self.addChildViewController(self.statusViewController)
+        self.view.addSubview(self.statusViewController.view)
     }
 
     func debug(message: String) {
-        let date = NSDate()
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss" // GMT +8
-        let log = "[%@] %@".format(formatter.stringFromDate(date), message)
-        // console
-        println(log)
-        // on debug view
-        self.debugView.textColor = UIColor.greenColor()
-        self.debugView.text = self.debugView.text.stringByAppendingString(log + "\n")
+        self.debugViewController.log(message)
     }
 
     func locationManager(_manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -111,8 +96,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             return
         }
         var userLocation = mkUserLocation.location!
-        self.latitude.text = "lat: %.8f".format(userLocation.coordinate.latitude)
-        self.longitude.text = "lon: %.8f".format(userLocation.coordinate.longitude)
+        self.statusViewController.update(userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
 //        self.debug("Current location: %.8f, %.8f".format(userLocation.coordinate.latitude, userLocation.coordinate.longitude))
         if let last_location = self.userLocations.last? {
 //            self.debug("Last location: %.8f, %.8f".format(last_location.coordinate.latitude, last_location.coordinate.longitude))
@@ -171,8 +155,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                     println("table view drop down expaned")
             })
         } else {
-            self.addChildViewController(recordTableViewController)
-            self.view.addSubview(recordTableViewController.view)
             UIView.animateWithDuration(0.75, animations: {
                 self.recordTableViewController.view.frame = hiddenFrame
                 }, completion: { (finished: Bool) in
@@ -196,7 +178,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                     var root = GPXParser.parseGPXWithString(content)
                     for (index, element) in enumerate(root.waypoints!) {
-                        self.debug("latitude: %.8f longitude: %.8f".format(element.latitude, element.longitude))
+//                        self.debug("latitude: %.8f longitude: %.8f".format(element.latitude, element.longitude))
                         self.playLocation(CLLocation(latitude: element.latitude, longitude: element.longitude))
                         sleep(2)
                     }
