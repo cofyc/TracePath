@@ -22,6 +22,8 @@
 		FB7B747019AE20830064892C /* TPMKAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB7B746F19AE20830064892C /* TPMKAnnotation.swift */; };
 		FBBC363C19A9099E002128F5 /* location.gpx in Resources */ = {isa = PBXBuildFile; fileRef = FBBC363B19A9099E002128F5 /* location.gpx */; };
 		FBBC364019AA0D5C002128F5 /* GPX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBBC363F19AA0D5C002128F5 /* GPX.framework */; };
+		FBE1A89F19BC785F00CD02AE /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE1A89D19BC785F00CD02AE /* RecordTableViewCell.swift */; };
+		FBE1A8A019BC785F00CD02AE /* RecordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE1A89E19BC785F00CD02AE /* RecordTableViewCell.xib */; };
 		FBF9AEA719A8966500411189 /* ObjcSwiftBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF9AEA619A8966500411189 /* ObjcSwiftBridge.m */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +57,8 @@
 		FB7B746F19AE20830064892C /* TPMKAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TPMKAnnotation.swift; sourceTree = "<group>"; };
 		FBBC363B19A9099E002128F5 /* location.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = location.gpx; sourceTree = "<group>"; };
 		FBBC363F19AA0D5C002128F5 /* GPX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GPX.framework; path = Frameworks/GPX.framework; sourceTree = "<group>"; };
+		FBE1A89D19BC785F00CD02AE /* RecordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecordTableViewCell.swift; path = ../RecordTableViewCell.swift; sourceTree = "<group>"; };
+		FBE1A89E19BC785F00CD02AE /* RecordTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RecordTableViewCell.xib; path = ../RecordTableViewCell.xib; sourceTree = "<group>"; };
 		FBF9AE6E19A88C5F00411189 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = Frameworks/GoogleMaps.framework; sourceTree = "<group>"; };
 		FBF9AE8A19A8936600411189 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FBF9AE8C19A8937600411189 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -133,6 +137,8 @@
 				FB3897F919B76CF800840520 /* InfoView.xib */,
 				FB59599419BC557D0086001E /* RecordTableViewController.swift */,
 				FB59599519BC557D0086001E /* RecordTableViewController.xib */,
+				FBE1A89D19BC785F00CD02AE /* RecordTableViewCell.swift */,
+				FBE1A89E19BC785F00CD02AE /* RecordTableViewCell.xib */,
 				FB59599019BC4D020086001E /* SwiftCoreDataHelper.swift */,
 				FBF9AEA519A8966500411189 /* TracePath-Bridging-Header.h */,
 				FB62882D19A883E500B1C5B0 /* Images.xcassets */,
@@ -281,6 +287,7 @@
 				FB3897FA19B76CF800840520 /* InfoView.xib in Resources */,
 				FB59599719BC557D0086001E /* RecordTableViewController.xib in Resources */,
 				FBBC363C19A9099E002128F5 /* location.gpx in Resources */,
+				FBE1A8A019BC785F00CD02AE /* RecordTableViewCell.xib in Resources */,
 				FB62882E19A883E500B1C5B0 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -309,6 +316,7 @@
 				FB62882719A883E500B1C5B0 /* TracePath.xcdatamodeld in Sources */,
 				FB62882419A883E500B1C5B0 /* AppDelegate.swift in Sources */,
 				FB3C808819B30A9B00BFF820 /* Extensions.swift in Sources */,
+				FBE1A89F19BC785F00CD02AE /* RecordTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +437,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TracePath/TracePath-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -450,6 +459,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TracePath/TracePath-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

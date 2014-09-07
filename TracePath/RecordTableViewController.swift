@@ -16,6 +16,8 @@ class RecordTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.tableView.registerNib(UINib(nibName: "RecordTableViewCell", bundle:nil), forCellReuseIdentifier: "cell")
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -52,15 +54,11 @@ class RecordTableViewController: UITableViewController {
         return records.count
     }
 
-    /*
     override func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
-
-        // Configure the cell...
-
+        let cell:RecordTableViewCell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as RecordTableViewCell
+        cell.title.text = "test"
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.

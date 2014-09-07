@@ -18,7 +18,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var userLocations: [CLLocation] = []
     var debugView: UITextView!
     var infoView: UIView!
-    var theTableViewShowed = false
+    var theTableViewShowed: Bool = false
     var recordTableViewController: RecordTableViewController = RecordTableViewController()
 
     @IBOutlet weak var latitude: UITextField!
