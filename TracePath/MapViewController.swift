@@ -13,6 +13,10 @@ import CoreLocation
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet var toolbar: UIToolbar!
+    @IBOutlet var mapView: MKMapView!
+
+    var locManager: CLLocationManager!
+    var userLocations: [CLLocation] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,11 +27,25 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         // change height
 //        let frame:CGRect = self.toolbar.frame // height is locked in IB
 //        self.toolbar.frame = CGRect(origin: frame.origin, size: CGSize(width: frame.size.width, height: 30))
+        self.locManager = CLLocationManager()
+        if ((UIDevice.currentDevice().systemVersion as NSString).floatValue >= 8.0) {
+            self.locManager!.requestWhenInUseAuthorization()
+        } else {
+            self.locManager!.startUpdatingLocation()
+        }
+        self.locManager!.delegate = self
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func locationManager(_manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+//        self.debug("didChangeAuthorizationStatus: %d".format(status.toRaw()))
+        if (status == CLAuthorizationStatus.AuthorizedWhenInUse) {
+            self.mapView.showsUserLocation = true
+        }
+    }
+
+    func log(message: String) {
+        let parentViewController:ViewController = self.parentViewController as ViewController
+        parentViewController.debugViewController.log(message)
     }
 
     func mapView(mapView: MKMapView!, didUpdateUserLocation mkUserLocation: MKUserLocation) {
@@ -77,7 +95,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 //        self.debug("You tapped at \(coordinate.latitude), \(coordinate.longitude)")
 //    }
 
-    func bookmarks(sender: UIBarButtonItem) {
+    @IBAction func showBookmarks(sender: UIBarButtonItem) {
+        log("show bookmarks")
 //        var fullFrame = CGRectMake(0, statusBarFrame.height, screenWidth, 400);
 //        var hiddenFrame = CGRectMake(0, statusBarFrame.height, screenWidth, 0);
 //        // toggle view
@@ -103,7 +122,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
 
     @IBAction func record(sender: UIBarButtonItem!) {
-        println("record")
+        log("record")
 //        self.debug(String(format: "pressed %@ button", sender!.title!))
 //        let bundle = NSBundle.mainBundle()
 //        if let path = bundle.pathForResource("location", ofType: "gpx") {
@@ -138,7 +157,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
 //        var point = sender.locationInView(self.theMapView)
 //        var coordinate = self.theMapView.convertPoint(point, toCoordinateFromView:self.theMapView)
 //        // create annotation
-//        var dropPin = TPMKAnnotation(coordinate: coordinate)
+//        var dropPin = MKAnnotation(coordinate: coordinate)
 //        self.theMapView.addAnnotation(dropPin)
 //
 //        self.debug("total %d annotations".format(self.theMapView.annotations.count))

@@ -7,15 +7,9 @@
 //
 
 import UIKit
-import MapKit
-import CoreLocation
 
 class ViewController: UIViewController {
 
-    var locManager: CLLocationManager!
-    var theMapView: MKMapView!
-    var theToolBarView: UIToolbar!
-    var userLocations: [CLLocation] = []
     var theTableViewShowed: Bool = false
     var recordTableViewController: RecordTableViewController = RecordTableViewController(nibName: "RecordTableViewController", bundle: nil)
     var statusViewController: StatusViewController = StatusViewController(nibName: "StatusViewController", bundle: nil)
@@ -89,15 +83,4 @@ class ViewController: UIViewController {
         self.debugViewController.log(message)
     }
 
-    func locationManager(_manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        self.debug("didChangeAuthorizationStatus: %d".format(status.toRaw()))
-        if (status == CLAuthorizationStatus.AuthorizedWhenInUse) {
-            self.theMapView.showsUserLocation = true
-        }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 }

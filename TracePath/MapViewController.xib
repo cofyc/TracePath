@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MapViewController" customModule="TracePath" customModuleProvider="target">
             <connections>
+                <outlet property="mapView" destination="uXS-Vb-G4R" id="OB5-yK-APZ"/>
                 <outlet property="toolbar" destination="3YI-B8-mI3" id="yjw-Kn-03w"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -30,7 +31,11 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Lvm-Bo-cMQ"/>
-                        <barButtonItem systemItem="bookmarks" id="jBM-2a-a3i"/>
+                        <barButtonItem systemItem="bookmarks" id="jBM-2a-a3i">
+                            <connections>
+                                <action selector="showBookmarks:" destination="-1" id="6U2-QE-ddz"/>
+                            </connections>
+                        </barButtonItem>
                     </items>
                 </toolbar>
             </subviews>
