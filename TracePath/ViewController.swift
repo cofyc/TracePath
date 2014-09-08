@@ -17,7 +17,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var theToolBarView: UIToolbar!
     var userLocations: [CLLocation] = []
     var theTableViewShowed: Bool = false
-    var recordTableViewController: RecordTableViewController = RecordTableViewController(nibName: "RecordTableView", bundle: nil)
+    var recordTableViewController: RecordTableViewController = RecordTableViewController(nibName: "RecordTableViewController", bundle: nil)
     var statusViewController: StatusViewController = StatusViewController(nibName: "StatusViewController", bundle: nil)
     var debugViewController: DebugViewController = DebugViewController(nibName: "DebugViewController", bundle: nil)
 
@@ -134,7 +134,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
 
     // drag pin (TODO)
     func  mapView(mapView: MKMapView!, annotationView: MKAnnotationView!, didChangeDragState newState: MKAnnotationViewDragState, fromOldState oldState:MKAnnotationViewDragState) {
-        println("annotationView/didChangeDragState");
+        self.debug("annotationView/didChangeDragState");
     }
 
     func mapView(mapView: MKMapView!, didLongPressAtCoordinate coordinate: CLLocationCoordinate2D) {
@@ -152,13 +152,13 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             UIView.animateWithDuration(0.75, animations: {
                 self.recordTableViewController.view.frame = fullFrame
                 }, completion: { (finished: Bool) in
-                    println("table view drop down expaned")
+                    self.debug("table view drop down expaned")
             })
         } else {
             UIView.animateWithDuration(0.75, animations: {
                 self.recordTableViewController.view.frame = hiddenFrame
                 }, completion: { (finished: Bool) in
-                    println("table view drop down collapsed")
+                    self.debug("table view drop down collapsed")
                     self.recordTableViewController.removeFromParentViewController()
                     self.recordTableViewController.view.removeFromSuperview()
             })
