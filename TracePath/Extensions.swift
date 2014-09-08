@@ -14,6 +14,15 @@ let screenRect = UIScreen.mainScreen().bounds
 let screenWidth = screenRect.size.width
 let screenHeight = screenRect.size.height
 
+// log
+func log(message: String) {
+    let window = UIApplication.sharedApplication().keyWindow
+    if let rootViewController:ViewController = window.rootViewController as? ViewController {
+        let debugViewController:DebugViewController = rootViewController.debugViewController
+        debugViewController.log(message)
+    }
+}
+
 // Add format function for String type.
 func StringWithFormat(format: String, args: CVarArgType...) -> String {
     return NSString(format: format, arguments: getVaList(args))

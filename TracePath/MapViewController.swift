@@ -43,11 +43,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
 
-    func log(message: String) {
-        let parentViewController:ViewController = self.parentViewController as ViewController
-        parentViewController.debugViewController.log(message)
-    }
-
     func mapView(mapView: MKMapView!, didUpdateUserLocation mkUserLocation: MKUserLocation) {
 //        if (mkUserLocation.location? == nil) {
 //            return
