@@ -27,6 +27,8 @@
 		FBE1A8A619BCA7EE00CD02AE /* DebugViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE1A8A419BCA7EE00CD02AE /* DebugViewController.xib */; };
 		FBE1A8AD19BCC3E700CD02AE /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE1A8AB19BCC3E700CD02AE /* StatusViewController.swift */; };
 		FBE1A8AE19BCC3E700CD02AE /* StatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE1A8AC19BCC3E700CD02AE /* StatusViewController.xib */; };
+		FBE1A8B119BDF1B200CD02AE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE1A8AF19BDF1B200CD02AE /* MapViewController.swift */; };
+		FBE1A8B219BDF1B200CD02AE /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FBE1A8B019BDF1B200CD02AE /* MapViewController.xib */; };
 		FBF9AEA719A8966500411189 /* ObjcSwiftBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF9AEA619A8966500411189 /* ObjcSwiftBridge.m */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +67,8 @@
 		FBE1A8A419BCA7EE00CD02AE /* DebugViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DebugViewController.xib; sourceTree = "<group>"; };
 		FBE1A8AB19BCC3E700CD02AE /* StatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		FBE1A8AC19BCC3E700CD02AE /* StatusViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusViewController.xib; sourceTree = "<group>"; };
+		FBE1A8AF19BDF1B200CD02AE /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		FBE1A8B019BDF1B200CD02AE /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		FBF9AE6E19A88C5F00411189 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = Frameworks/GoogleMaps.framework; sourceTree = "<group>"; };
 		FBF9AE8A19A8936600411189 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FBF9AE8C19A8937600411189 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -140,6 +144,8 @@
 				FB7B746F19AE20830064892C /* TPMKAnnotation.swift */,
 				FBF9AEA619A8966500411189 /* ObjcSwiftBridge.m */,
 				FB3C808719B30A9B00BFF820 /* Extensions.swift */,
+				FBE1A8AF19BDF1B200CD02AE /* MapViewController.swift */,
+				FBE1A8B019BDF1B200CD02AE /* MapViewController.xib */,
 				FBE1A8AB19BCC3E700CD02AE /* StatusViewController.swift */,
 				FBE1A8AC19BCC3E700CD02AE /* StatusViewController.xib */,
 				FB59599419BC557D0086001E /* RecordTableViewController.swift */,
@@ -297,6 +303,7 @@
 				FBE1A8AE19BCC3E700CD02AE /* StatusViewController.xib in Resources */,
 				FB59599719BC557D0086001E /* RecordTableViewController.xib in Resources */,
 				FBBC363C19A9099E002128F5 /* location.gpx in Resources */,
+				FBE1A8B219BDF1B200CD02AE /* MapViewController.xib in Resources */,
 				FBE1A8A019BC785F00CD02AE /* RecordTableViewController.xib in Resources */,
 				FB62882E19A883E500B1C5B0 /* Images.xcassets in Resources */,
 			);
@@ -329,6 +336,7 @@
 				FB62882419A883E500B1C5B0 /* AppDelegate.swift in Sources */,
 				FB3C808819B30A9B00BFF820 /* Extensions.swift in Sources */,
 				FBE1A89F19BC785F00CD02AE /* RecordTableViewCell.swift in Sources */,
+				FBE1A8B119BDF1B200CD02AE /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
